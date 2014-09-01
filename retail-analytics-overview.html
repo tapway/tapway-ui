@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <title>Tapway</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="assets/stylesheets/overrides.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container"><div class="shadow-wrap">
+      <!-- header -->
+      <header>
+        <div class="navbar navbar-primary" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#"><img src="assets/images/tapway_logo.png" alt="Tapway"></a>
+            </div>
+            <div>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Sign Out</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </div>
+      </header>
+      <!-- /header -->
+      <!-- main -->
+      <main>
+        <div class="row">
+          <!-- .side-nav -->
+            <nav class="side-nav">
+              <ul class="nav">
+                <li class="dashboard">
+                  <a href="#"><img src="assets/images/menu-dashboard.png">
+                  <br/>Dashboard</a></li>
+                <li class="retail-analytics active">
+                  <a href="#"><img src="assets/images/menu-retail-analytics.png">
+                  <br/>Retail Analytics</a></li>
+                <li class="sales-analytics">
+                  <a href="#"><img src="assets/images/menu-sales-analytics.png">
+                  <br/>Sales Analytics</a></li>
+                <li class="social-wifi">
+                  <a href="#"><img src="assets/images/menu-social-wifi.png">
+                  <br/>Social WiFi</a></li>
+                <li class="customer-profiles">
+                  <a href="#"><img src="assets/images/menu-customer-profiles.png">
+                  <br/>Customer Profiles</a></li>
+              </ul>
+            </nav>
+          <!-- /.side-nav -->
+          <!-- .main-section -->
+            <section class="main-section">
+              <div class="section-heading">
+                <h1>Retail Analytics <br/> <small><a href="#">The Red Bean Bag</a>, KL</small></h1>
+                <nav class="secondary-nav">
+                  <ul class="nav">
+                    <li class="active"><a href="#">Overview</a></li>
+                    <li><a href="#">Acquisition</a></li>
+                    <li><a href="#">Engagement</a></li>
+                    <li><a href="#">Retention</a></li>
+                    <li><a href="#">Customer Analysis</a></li>
+                    <li><a href="#">Video Analytics</a></li>
+                  </ul>
+                  <div class="daterange-nav pull-right" id="reportrange">                    
+                    <div class="form-group">
+                      <label>Date range: 
+                        <!-- <a href="#">1d</a>&nbsp;
+                        <a href="#">1w</a>&nbsp;
+                        <a href="#">1m</a>&nbsp;
+                        <a href="#">3m</a>&nbsp;
+                        <a href="#">6m</a>&nbsp;
+                        <a href="#">1y</a>&nbsp;
+                        <a href="#">All</a> -->
+                      </label>
+                      <input type="text" class="form-control">
+                  </div>
+                </nav>
+              </div>
+              <!-- /.section-heading -->
+
+              <!-- .section-body -->
+              <div class="section-body">
+                <!-- row 1 -->
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="panel border-right">
+                      <div class="panel-body">
+                        <h4>Acquisition</h4>
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <div class="data-block walk-by-traffic">                       
+                              <span class="title">Walk-by Traffic</span><br/>
+                              <span class="value">132793</span><br/>
+                              <span class="change plus"><i class="fa fa-caret-up"></i> 93592</span><br/>
+                              From 39201
+                            </div>
+                            <!-- ./data-block --> 
+                            <div class="data-block capture-rate">                       
+                              <span class="title">Capture Rate</span><br/>
+                              <span class="value">8.28%</span><br/>
+                              <span class="change minus"><i class="fa fa-caret-down"></i> -2.2%</span><br/>
+                              From 10.52%
+                            </div>
+                            <!-- ./data-block -->
+                          </div>
+                          <div class="col-xs-8">
+                            <div class="custom-calendar display-month">
+                              <div class="days-of-week">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                              </div>
+                              <ul>
+                                <li style="background-color: rgba(8,128,169,0.1)">May 5</li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.5)"></li>
+                                <li style="background-color: rgba(8,128,169,0.7)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+
+                                <li style="background-color: rgba(8,128,169,0.3)">May 12</li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.5)"></li>
+                                <li style="background-color: rgba(8,128,169,1.0)"></li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                
+                                <li style="background-color: rgba(8,128,169,0.5)">May 19</li>
+                                <li style="background-color: rgba(8,128,169,0.3)"></li>
+                                <li style="background-color: rgba(8,128,169,0.5)"></li>
+                                <li style="background-color: rgba(8,128,169,0.5)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+
+                                <li style="background-color: rgba(8,128,169,0.1)">May 26</li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                                <li style="background-color: rgba(8,128,169,0.1)"></li>
+                              </ul>
+                            </div>
+                            <!-- /custom-calendar -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- panel-body -->
+                    </div>
+                  </div><!--/col-->
+                  <div class="col-xs-6">
+                    <div class="panel">
+                      <div class="panel-body">
+                        <h4 class="text-right">Engagement</h4>
+                        <div class="row">
+                          <div class="col-xs-8">
+                            <div class="custom-calendar display-month">
+                              <div class="days-of-week">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                              </div>
+                              <ul>
+                                <li style="background-color: rgba(19,149,62,0.1)">May 5</li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.5)"></li>
+                                <li style="background-color: rgba(19,149,62,0.7)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+
+                                <li style="background-color: rgba(19,149,62,0.3)">May 12</li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.5)"></li>
+                                <li style="background-color: rgba(19,149,62,1.0)"></li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                
+                                <li style="background-color: rgba(19,149,62,0.5)">May 19</li>
+                                <li style="background-color: rgba(19,149,62,0.3)"></li>
+                                <li style="background-color: rgba(19,149,62,0.5)"></li>
+                                <li style="background-color: rgba(19,149,62,0.5)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+
+                                <li style="background-color: rgba(19,149,62,0.1)">May 26</li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                                <li style="background-color: rgba(19,149,62,0.1)"></li>
+                              </ul>
+                            </div>
+                            <!-- /custom-calendar -->
+                          </div>
+                          <div class="col-xs-4">                            
+                            <div class="data-block visitor-traffic">                       
+                              <span class="title">Visitor Traffic</span><br/>
+                              <span class="value">11603</span><br/>
+                              <span class="change minus"><i class="fa fa-caret-down"></i> -11.05%</span><br/>
+                              From 39201
+                            </div>
+                            <!-- ./data-block -->
+                            <div class="data-block dwell-time">                       
+                              <span class="title">Dwell Time</span><br/>
+                              <span class="value">41.71m</span><br/>
+                              <span class="change minus"><i class="fa fa-caret-down"></i> -11.05%</span><br/>
+                              From 52.76%
+                            </div>
+                            <!-- ./data-block --> 
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <!-- panel-body -->
+                    </div>
+                  </div><!--/col-->
+                </div>
+                <!-- /row 1 -->
+                <!-- row 2 -->
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="panel border-top">
+                      <div class="panel-body">
+                        <h4 class="text-center">Retention</h4>
+                        <div class="row">
+                          <div class="col-xs-3 border-right">
+                            <div class="data-block new-visitors">                       
+                              <span class="title">New Visitors</span><br/>
+                              <span class="value">5473</span><br/>
+                              <span class="change plus"><i class="fa fa-caret-up"></i> 93592</span><br/>
+                              From 39201
+                            </div>
+                            <!-- ./data-block -->
+                          </div>
+                          <div class="col-xs-3 border-right">
+                            <div class="data-block repeat-visitors">                       
+                              <span class="title">Repeat Visitors</span><br/>
+                              <span class="value">5473</span><br/>
+                              <span class="change plus"><i class="fa fa-caret-up"></i> 93592</span><br/>
+                              From 39201
+                            </div>
+                            <!-- ./data-block -->
+                          </div>
+                          <div class="col-xs-3 border-right">
+                            <div class="data-block retention-rate">                       
+                              <span class="title">Retention Rate</span><br/>
+                              <span class="value">8.28%</span><br/>
+                              <span class="change minus"><i class="fa fa-caret-down"></i> -2.22%</span><br/>
+                              From 10.52%
+                            </div>
+                            <!-- ./data-block -->
+                          </div>
+                          <div class="col-xs-3">
+                            <div class="data-block visit-frequency">                       
+                              <span class="title">Visit Frequency</span><br/>
+                              <span class="value">8.28%</span><br/>
+                              <span class="change minus"><i class="fa fa-caret-down"></i> -2.22%</span><br/>
+                              From 10.52%
+                            </div>
+                            <!-- ./data-block -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /row 2 -->
+              </div>
+              <!-- /.section-body -->
+
+            </section>
+          <!-- /.main-section -->
+
+        </div>        
+      </main>
+      <!-- /main -->
+      
+    </div></div>
+    <!-- /.shadow-wrap, /.container -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2014 Tapway Sdn. Bhd. <a href="#">Privacy.</a> <a href="#">Terms</a></p>
+      </div>
+    </footer>
+
+    <script src="assets/javascripts/jquery-1.11.0.min.js"></script>
+    <script src="assets/javascripts/bootstrap.min.js"></script>
+    <script src="assets/javascripts/moment.js"></script>
+    <script src="assets/javascripts/daterangepicker.js"></script>
+    <script src="assets/javascripts/jquery.tablesorter.min.js"></script>
+    <script src="assets/javascripts/jquery.metadata.js"></script>
+    <script src="assets/javascripts/scripts.js"></script>
+    <script>
+    $(function() {
+      //default value
+      $('#reportrange input').val(moment().format('MMM D, YYYY') + ' - ' + moment().format('MMM D, YYYY'));
+
+      //pick a value
+      $('#reportrange').daterangepicker(
+        {
+          ranges: {
+             'Today': [moment(), moment()],
+             'Last 7 Days': [moment().subtract('days', 6), moment()],
+             'Last 30 Days': [moment().subtract('days', 29), moment()],
+             'Last 180 Days': [moment().subtract('days', 179), moment()],
+             'Last 360 Days': [moment().subtract('days', 359), moment()]
+          },
+           // startDate: moment(),
+           // endDate: moment()
+        },
+        function(start, end) {
+          // $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+          $('#reportrange input').val(start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY'));
+        }
+      );
+    });
+
+    </script>
+  </body>
+</html>
+
+
