@@ -16,12 +16,19 @@ $gray-dark:              lighten(#000, 20%) !default;   // #333
 $gray:                   lighten(#000, 33.5%) !default; // #555
 $gray-light:             lighten(#000, 60%) !default;   // #999
 $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+$gray-soft:     #E6E7E8;
+$gray-slate:    #334751;
 
-$brand-primary:         #bd1f52;//maroon //#428bca !default;
+$brand-primary:         #81b4e3;//light blue //#428bca !default;
 $brand-success:         #5cb85c !default;
-$brand-info:            #0088cb;//#5bc0de !default;
+$brand-info:            $gray-slate; //#0088cb;//#5bc0de !default;
 $brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
+$brand-danger:          #cf6767; //#d9534f !default;
+$blue:    #0888CA;
+$maroon:  #BD2053;
+$orange:  #ff9900;
+$green:   #00a652;
+$yellow:  #f8cb10;
 
 
 //== Scaffolding
@@ -34,7 +41,7 @@ $body-bg:               #fff !default;
 $text-color:            $gray-dark !default;
 
 //** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $text-color; //$brand-primary !default;
 //** Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%) !default;
 
@@ -43,7 +50,7 @@ $link-hover-color:      darken($link-color, 15%) !default;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, "Arimo", Arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
@@ -53,11 +60,11 @@ $font-size-base:          14px !default;
 $font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
 
-$font-size-h1:            21px;//floor(($font-size-base * 2.6)) ; // ~36px
-$font-size-h2:            20px;//floor(($font-size-base * 2.15)) ; // ~30px
+$font-size-h1:            28px;//floor(($font-size-base * 2.6)) ; // ~36px
+$font-size-h2:            30px;//floor(($font-size-base * 2.15)) ; // ~30px
 $font-size-h3:            20px;//ceil(($font-size-base * 1.7)); // ~24px
 $font-size-h4:            16px;//ceil(($font-size-base * 1.25)); // ~18px
-$font-size-h5:            $font-size-base;
+$font-size-h5:            16px; //$font-size-base;
 $font-size-h6:            11px;//ceil(($font-size-base * 0.85)); // ~12px
 
 $font-size-h1:            floor(($font-size-base * 2.6)) !default; // ~36px
@@ -68,7 +75,9 @@ $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil(($font-size-base * 0.85)) !default; // ~12px
 
 //** Unit-less `line-height` for use in components like buttons.
-$line-height-base:        1.428571429 !default; // 20/14
+//Because of this bug: https://github.com/twbs/bootstrap-sass/issues/409, I'm manually rounding this value now.
+// $line-height-base:        1.428571429 !default; // 20/14
+$line-height-base:        1.42858;
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
 $line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
 
@@ -107,9 +116,9 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.33 !default;
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        4px !default;
-$border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
+$border-radius-base:        0;//4px !default;
+$border-radius-large:       0;//6px !default;
+$border-radius-small:       0;//3px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -149,9 +158,9 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              #333 !default;
+$btn-default-color:              $gray-light; //#333 !default;
 $btn-default-bg:                 #fff !default;
-$btn-default-border:             #ccc !default;
+$btn-default-border:             #666; //#ccc !default;
 
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
@@ -171,7 +180,7 @@ $btn-warning-border:             darken($btn-warning-bg, 5%) !default;
 
 $btn-danger-color:               #fff !default;
 $btn-danger-bg:                  $brand-danger !default;
-$btn-danger-border:              darken($btn-danger-bg, 5%) !default;
+$btn-danger-border:              $brand-danger; //darken($btn-danger-bg, 5%) !default;
 
 $btn-link-disabled-color:        $gray-light !default;
 
@@ -220,7 +229,7 @@ $input-group-addon-border-color: $input-border !default;
 //** Background for the dropdown menu.
 $dropdown-bg:                    #fff !default;
 //** Dropdown menu `border-color`.
-$dropdown-border:                rgba(0,0,0,.15) !default;
+$dropdown-border:                #ccc;//rgba(0,0,0,.15) !default;
 //** Dropdown menu `border-color` **for IE8**.
 $dropdown-fallback-border:       #ccc !default;
 //** Divider color for between dropdown items.
@@ -297,10 +306,10 @@ $screen-xs-max:              ($screen-sm-min - 1) !default;
 $screen-sm-max:              ($screen-md-min - 1) !default;
 $screen-md-max:              ($screen-lg-min - 1) !default;
 
-
+//badrul
 //GOING WITH NON-RESPONSIVE LAYOUT:
 //http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site
-$grid-float-breakpoint:     0;
+// $grid-float-breakpoint:     0;
 
 
 //== Grid system
@@ -310,7 +319,7 @@ $grid-float-breakpoint:     0;
 //** Number of columns in the grid.
 $grid-columns:              12 !default;
 //** Padding between columns. Gets divided in half for the left and right.
-$grid-gutter-width:         1px; //30px !default;
+$grid-gutter-width:         30px !default;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
 $grid-float-breakpoint:     $screen-sm-min !default;
@@ -487,7 +496,7 @@ $state-success-text:             #3c763d !default;
 $state-success-bg:               #dff0d8 !default;
 $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
 
-$state-info-text:                #31708f !default;
+$state-info-text:                $gray-slate; //#31708f !default;
 $state-info-bg:                  #d9edf7 !default;
 $state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%) !default;
 

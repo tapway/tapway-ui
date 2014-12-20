@@ -7,5 +7,6 @@ $('*[rel="popover"]').popover();
 $('.tablesorter').tablesorter();
 
 
+
 //end jquery
 });

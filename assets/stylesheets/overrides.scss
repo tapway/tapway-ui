@@ -1,18 +1,36 @@
 @import "bootstrap.scss";
  
-$color1: $gray-darker;
-$color2: $brand-primary;
-$color3: $brand-info;
 
-*:hover {
-  @include transition(background-color 0.2s linear, color 0.2s linear, border 0.2s linear);
+a:hover, li:hover {
+  @include transition(background 0.2s linear, background-color 0.2s linear, color 0.2s linear, border 0.2s linear);
 }
 
-//type
-.text-large { font-size: $font-size-large; }
-.text-small { font-size: $font-size-small; }
+ 
 
-//progress bar
+/* Type */
+.text-left    { text-align: left !important;}
+.text-right   { text-align: right !important;}
+.text-xxlarge { font-size: 120px; }
+.text-xlarge  { font-size:  58px; }
+.text-large   { font-size: $font-size-large; }
+.text-small   { font-size: $font-size-small; }
+.text-xsmall  { font-size: $font-size-small /2; }
+.text-bold    { font-weight: bold; }
+.text-normal  { font-weight: normal; }
+.text-italic  { font-style: italic;}
+.text-white   { color: white; }
+.text-gray    { color: $gray-light; }
+.text-blue    { color: $blue; }
+.text-green   { color: $green; }
+.text-maroon  { color: $maroon; }
+.text-orange  { color: $orange; }
+.text-yellow  { color: $yellow; }
+
+/* Remove annoying outline on focused elements */
+a:focus {outline:none;}
+
+
+/* Progress bar */
 .progress {
   &.no-bg, &.no-background {
     background: none;
@@ -24,232 +42,882 @@ $color3: $brand-info;
   }
 }
 
-//layout
-.no-margin  { margin: 0 !important; }
-.no-padding { padding: 0 !important; }
+/* Form defaults */
+.form-control {
+  @include box-shadow(none);
+}
+label { font-weight: normal; }
 
+/* Additional alerts */
+.alert { 
+  padding: 7px 10px;
+  margin-bottom: 10px;
+}
+@mixin alert-color($color, $text-color) {
+  background-color: $color;
+  border-color: $color;
+  color: $text-color;
+}
+.alert-orange { @include alert-color($orange, $gray-dark);}
+.alert-yellow { @include alert-color($yellow, $gray-dark);}
 
-html {
-  background: url("../images/background.jpg") fixed no-repeat;
+/* Layout */
+$sizes-list: (
+  no 0px,
+  xs 5px, 
+  sm 10px, 
+  md 15px, 
+  lg 20px
+);
+@each $value in $sizes-list {
+  .#{nth($value, 1)}-margin         { margin:         #{nth($value, 2)} !important; }   //.no-margin
+  .#{nth($value, 1)}-margin-right   { margin-right:   #{nth($value, 2)} !important; }   //.no-margin-right
+  .#{nth($value, 1)}-margin-left    { margin-left:    #{nth($value, 2)} !important; }   //etc.
+  .#{nth($value, 1)}-margin-top     { margin-top:     #{nth($value, 2)} !important; }
+  .#{nth($value, 1)}-margin-bottom  { margin-bottom:  #{nth($value, 2)} !important; } 
+  .#{nth($value, 1)}-padding        { padding:        #{nth($value, 2)} !important; }
+  .#{nth($value, 1)}-padding-right  { padding-right:  #{nth($value, 2)} !important; }
+  .#{nth($value, 1)}-padding-left   { padding-left:   #{nth($value, 2)} !important; }
+  .#{nth($value, 1)}-padding-top    { padding-top:    #{nth($value, 2)} !important; }
+  .#{nth($value, 1)}-padding-bottom { padding-bottom: #{nth($value, 2)} !important; }
 }
 
+html {
+}
 body {
   background: none;
-  .shadow-wrap {
+  > .container-fluid {
     margin-top: 20px;
-    border-radius: 4px;
-    @include box-shadow(2px 0px 15px 3px rgba(0,0,0,0.3));
+    > header {
+      position: relative;
+      z-index: 2; //fix for overlap with .main-section
+    }
   }
 }
 
-.container {
-  //http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site
-  width: 1300px !important;   
-}
+.container {}
 
+/* Navigation */
 .navbar {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  @media (min-width: $screen-sm-min) {  
+    &.navbar-primary { 
+      // margin-top: -45px;
+      position: absolute;
+      top: 0;
+      right: 15px;
+    }
+  }
   &.navbar-primary {
     margin-bottom: 0;
-    height: 60px;
-    background: $color1;
-    .navbar-nav li {
-      &.active {
-        a { 
-          color: $color2;
-          background: none;
+    font-size: $font-size-base - 1;
+    .navbar-nav {
+      // margin-top: 10px;
+      &.navbar-right {}
+      > li {
+        &.active {
+          a { 
+            color: $gray;
+            background: $gray-lighter;
+          }
+        }
+        > a {
+          padding-top: 5px;
+          padding-bottom: 5px;
+          color: $gray;
+          &:hover { 
+            color: $gray; 
+            background: $gray-lighter;
+          }
         }
       }
-      a {
-        padding-top: 20px;
-        padding-bottom: 19px;
-        color: white;
-        &:hover { 
-          color: $color2; 
-          background: none;
-        }
+      .dropdown-menu { 
+        font-size: $font-size-base - 1 ; 
+        background-color: $gray-lighter;
+        border: 1px solid $gray-lighter;
+      }
+    }
+  }//.navbar-primary
+  .navbar-brand {
+    padding: 10px 0;
+    img { height: 55px; }
+  }
+}//.navbar 
+
+
+/* Nav tabs */
+@mixin nav-tabs($tabs-color, $text-color) {
+  border-bottom: none;
+  font-size: $font-size-base + 2;
+  > li {
+    > a {
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 5px !important;
+      margin-right: 10px !important;
+      color: $text-color;
+      &:hover { 
+        color: $text-color !important;
+        background: none !important; 
+        border-bottom: 3px solid lighten($tabs-color, 5%);
+      }
+    }
+    &.active > a {
+      &, &:hover, &:focus { 
+        color: $text-color !important;
+        background: none !important;        
+        border: none; 
+        border-bottom: 3px solid $tabs-color;
       }
     }
   }
-  .navbar-brand {
-    padding: 10px 0;
-    margin-left: 50px !important;
-    img { height: 45px; }
+}
+.nav-tabs             { @include nav-tabs($nav-tabs-border-color, $text-color) }
+.nav-tabs.nav-blue    { @include nav-tabs($blue, $text-color) }
+.nav-tabs.nav-maroon  { @include nav-tabs($maroon, $text-color) }
+.nav-tabs.nav-orange  { @include nav-tabs($orange, $text-color) }
+.nav-tabs.nav-green   { @include nav-tabs($green, $text-color) }
+
+
+
+/** Dropdown **/
+.dropdown-menu {
+  @include box-shadow(0 0 0 rgba(0,0,0,0));
+  color: $gray;
+  background-color: $dropdown-bg;
+  border: 1px solid $dropdown-fallback-border; // IE8 fallback
+  border: 1px solid $dropdown-border;
+  .divider {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: $gray;
   }
-}//.navbar 
- 
+}
+.dropdown-menu.daterangepicker {
+  background-color: $gray-lighter;
+  border: 1px solid $gray-lighter;
+}
+//Special case for selecting multiple stores
+.dropdown-multiple {
+  .dropdown-menu {
+    min-width: 200px;
+    .checkbox { padding-left: 25px; }     
+  }
+}
+
+
+/** Buttons **/
+@mixin colorize-btn($bg-color, $border-color, $text-color){
+  background: $bg-color; border-color: $border-color; color: $text-color;
+  &:hover, &.active { background: darken($bg-color, 5%); border-color: $border-color; color: $text-color; }
+}
+.btn-gray   { @include colorize-btn(white, #ccc, $gray); }
+.btn-black  { @include colorize-btn($gray-slate, $gray-slate, white); }
+.btn-orange { @include colorize-btn($orange, $orange, white); }
+.btn-green  { @include colorize-btn($green, $green, white); }
+.btn-blue   { @include colorize-btn($blue, $blue, white); }
+
+.btn-lg {
+  font-size: 16px;
+  padding: 6px 12px;
+}
+.btn-select {
+  @extend .btn-link;
+  border: none;
+  padding: 2px;
+  &:hover, &.active {
+    text-decoration: none;
+    background-color: #eee;
+  }
+}
+.btn-group {
+  &.open {
+    .dropdown-toggle { @include box-shadow(none); }
+  }
+}
+
+
+/* Glyphicons */
+.glyphicon {
+  color: #ccc;
+  &.glyphicon-sm { font-size: 11px; }
+}
+
+/* Modals */
+@mixin modal($modal-color, $modal-hint-color) {
+  .modal-backdrop {}
+  .modal-dialog {}
+  .modal-content {}
+  .modal-header {
+    background-color: $modal-color;
+    color: $modal-hint-color;
+    .close { 
+      font-size: $font-size-base *2; 
+      color: $modal-hint-color;
+      opacity: 1;
+    }
+  }
+  .modal-title { color: $modal-hint-color; }
+  .modal-body {}
+  .modal-footer { 
+    margin-top: 5px;
+    border: none; 
+  }
+  .btn {
+    &.btn-default {
+      border-color: $modal-color;
+      color: $modal-color;
+    }
+    &.btn-primary { 
+      background-color: $modal-color; 
+      border-color: $modal-color;
+      color: $modal-hint-color;
+      &:hover { background-color: darken($modal-color, 5%); }
+    };
+  }
+  .table { 
+    margin-bottom: 5px;
+    tr:last-child { td { border-bottom: 1px solid $table-border-color; } } 
+  }
+}
+.modal.modal-blue   { @include modal($blue, white); }
+.modal.modal-maroon { @include modal($maroon, white); }
+.modal.modal-orange { @include modal($orange, white); }
+.modal.modal-green  { @include modal($green, white); }
+
+/* Main */
 main {
   min-height: 500px;
   padding-bottom: 20px;
   border-bottom-right-radius: $border-radius-base;
   border-bottom-left-radius: $border-radius-base;
-  background: url("../images/main-bg-with-white.png") repeat-y -250px;;
   //.side-nav
   nav.side-nav {
-    @extend .col-xs-2;
-    .nav {
-      //background: lighten($color1, 7%); //#343434
+    @extend .col-sm-2;
+    @media (min-width: $screen-sm-min) { 
+      & { width: 14%; }
+    }   
+    .nav {      
+      margin-top: 20px;
       text-align: center;
-      li {       
-        &.active { 
-          a { 
-            color: $color1;
-            background: white;
-            img { background: $color2; } 
+      li {
+        height: 90px;
+        &.dashboard   { background: url("../images/side-nav/dashboard-p.png") top center no-repeat; }
+        &.retail      { background: url("../images/side-nav/retail-p.png") top center no-repeat; }
+        &.marketing   { background: url("../images/side-nav/marketing-p.png") top center no-repeat; }
+        &.wifi        { background: url("../images/side-nav/wifi-p.png") top center no-repeat; }
+        &.customer    { background: url("../images/side-nav/customer-p.png") top center no-repeat; }
+        &.settings    { background: url("../images/side-nav/settings-p.png") top center no-repeat; }
+        &.backend     { background: url("../images/side-nav/backend-p.png") top center no-repeat; }
+
+        &:hover, &.active {
+          &.dashboard   { background: url("../images/side-nav/dashboard-a.png") top center no-repeat; }
+          &.retail      { background: url("../images/side-nav/retail-a.png") top center no-repeat; }
+          &.marketing   { background: url("../images/side-nav/marketing-a.png") top center no-repeat; }
+          &.wifi        { background: url("../images/side-nav/wifi-a.png") top center no-repeat; }
+          &.customer    { background: url("../images/side-nav/customer-a.png") top center no-repeat; }
+          &.settings    { background: url("../images/side-nav/settings-a.png") top center no-repeat; }
+          &.backend     { background: url("../images/side-nav/backend-a.png") top center no-repeat; }
+          a {
+            color: $gray-dark;
+            background: none; 
           }
-          &.dashboard         img { background: $color3; }
-          &.retail-analytics  img { background: $color2; }
-          &.sales-analytics   img { background: $color2; }
-          &.social-wifi       img { background: $color2; }
-          &.customer-profiles img { background: $color2; }
-        }
-        &:hover {
-          &.dashboard         img { background: $color3; }
-          &.retail-analytics  img { background: $color2; }
-          &.sales-analytics   img { background: $color2; }
-          &.social-wifi       img { background: $color2; }
-          &.customer-profiles img { background: $color2; }
-        }
+        }//li:hover, li.active
         a {
           color: $gray-light;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
           padding-top: 15px;
           padding-bottom: 15px;
           line-height: 1.8;
           &:hover {
-            color: $color1;
-            background: white; 
-            border-bottom: 1px solid white;           
+            color: $gray-dark;
+            background: none; 
           }          
-          img {
-            border-radius: 40px;
-            padding: 6px;
-            background: lighten($gray, 5%);
-          }
         }//a        
       }//li
     }//.nav
   }//.side-nav
 
-  //main-section
+  //main-section 
   section.main-section {
-    @extend .col-xs-10;
-    padding: 0 20px;
+    @extend .col-sm-10;
+    @media (min-width: $screen-sm-min) { 
+      & { width: 86%; }
+    }    
     .section-heading {
       @extend .row;
-      margin-top: 20px;
-      h1,h2,h3 { 
-        @extend .col-xs-4;
-        margin-top: 0;
+      margin-top: 5px;
+      header { 
+        @extend .col-xs-12;
+        h1,h2,h3 {
+          margin-top: 0;
+          color: $gray-light;
+        }
       }
-      nav.secondary-nav { 
-        @extend .col-xs-8;
+      .secondary-nav { 
+        @extend .col-xs-12;
+        position: relative;
+        margin: 10px 0 10px; 
+        min-height: 60px;       
         .nav {
           @extend .nav-pills;
-          float: right;
-          font-size: 13px;
+          // float: right;
+          // font-size: 13px;
           a {
             padding: 5px 15px;
-            color: $color1;
+            color: $gray-darker;
           }
         }//nav
         .daterange-nav {
-          @extend .form-inline;
-          padding: 5px 0;
-          float: right;
+          float: none;
+          padding: 0;
+          vertical-align: top;
           label {
             font-size: 85%;
             font-weight: normal;
             padding: 0 5px;
           }
-          a { color: $color3;}
-          .form-control { 
-            @extend .input-sm; 
-            width: 200px;
+          small { 
+            font-size: $font-size-small ;
+            display: block;
+            margin-top: 5px;
+          } 
+          .btn-report { 
+            font-size: 16px;
+            text-transform: uppercase; 
+            float: none;
+            b { text-transform: none; }
+            .fa-angle-down { position: static !important; }
           }
         }//.daterange-nav
+        @media (min-width: $screen-sm-min) {  
+          .daterange-nav { 
+            float: right;
+            small { text-align: right; }
+          }
+        }
+        .btn-group { 
+          margin-top: 10px; 
+          margin-right: 10px;
+          &:last-child { margin-right: 0; }
+          .btn-default {
+            position: relative;
+            min-width: 135px;
+            text-align: left;
+            .fa-angle-down {
+              position: absolute;
+              right: 10px;
+              margin-top: 4px;
+            }
+            &.reset { 
+              min-width: 0 !important;
+            }
+          }
+        }
+        .nav-tabs {
+          margin-top: 10px;
+        }
         .pull-right {
           .dropdown-menu {
             right: 0;
             left: auto;
           }
         }
+        .dropdown-menu {
+          background-color: $gray-lighter;
+          border: 1px solid $gray-lighter;
+        }
       }//.secondary-nav
     }//.section-heading
 
+
     .section-body {
-      border: 1px solid lighten($color1, 45%); 
       h1,h2,h3,h4,h5,h6 { 
         margin-top: 5px;
         &.title-thin {
           margin-top: 0;
           margin-bottom: -15px;
         }
+        &.no-margin-bottom {
+          margin-bottom: 2px;
+        }
+        &.no-margin-top {
+          margin-top: 2px;
+        }
+      }      
+      //add spacer for columns in mobile view
+      div[class*='col-'] { margin-bottom: 20px; }
+      @media (min-width: $screen-sm-min) {  
+         div[class*='col-'] { margin-bottom: 0; }
       }
-      .panel {
-        margin-bottom: 0;
-        @include box-shadow(none);        
-        border-radius: 0;        
-      }
-      .border-top    { border-top: 1px solid lighten($color1, 45%); }
-      .border-right  { border-right: 1px solid lighten($color1, 45%); }
-      .border-left   { border-left: 1px solid lighten($color1, 45%); }
-      .border-bottom { border-bottom: 1px solid lighten($color1, 45%); }
-      // & > .row > [class^="col-"]:last-child .panel { border-right: none; }
     }//.section-body
 
   }//.main-section
 }//main
 
+/* Semi-length borders for divs, tds, etc */
+//'semi-length' borders for columns
+.border-right, .border-left {
+  position: relative;
+}
+.border-left:before {
+  content:''; 
+  width:1px; 
+  height:67px; 
+  background:#424242; 
+  position:absolute; 
+  top: 60px;
+  left: 5px; 
+  display: none;
+}
+.border-right:after {
+  content:''; 
+  width:1px; 
+  height:67px; 
+  background:#424242; 
+  position:absolute; 
+  top: 60px;
+  right: 0; 
+  display: none;
+}
+@media (min-width: $screen-sm-min) {  
+  .border-right:after, .border-left:before {
+    display: block;
+  }
+}
+
+/* Footer */
 footer {  
   margin-top: 10px;
-  color: white;
+  padding: 0 10px;
+  color: $gray-light;
   font-size: 85%;
   a, a:hover {
-    color: $color3;
+    color: $brand-info;
   }
 }
 
-
-/** Data Blocks **/
-.data-block {
+/** Very specific stylings **/
+//retail analytics
+.hourly-average-box {
+  margin: 0 auto;
+  padding: 25px 35px 25px 35px;;
+  background: $gray-slate;
+  color: white;
+  font-weight: bold;
   text-align: center;
-  margin: 20px auto;
-  padding-left: 15px; 
-  min-height: 24px;
-  width: 135px;
-  font-size: $font-size-small;
-  .title {
-    font-size: $font-size-base - 1;
+}
+
+.devices-seen-chart-title { 
+  p { font-size: 15px; margin: 0; text-align: center; }
+}
+@media (min-width: $screen-sm-min) {  
+  .devices-seen-chart-title { 
+    p { margin: 50% 0; text-align: left; }
+    
+    position: relative;
+    &:after {
+      position: absolute;
+      width: 21px;
+      height: 35px;
+      top: 41%;
+      right: 0;
+      content: '';
+      background: url("../images/angle-right.png") no-repeat center center;
+    }
+  } 
+}
+
+//Appears on retail analytics live
+.retail-live-stats { 
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+  vertical-align: top;
+  text-align: center;
+
+  .main-text { 
+    font-size: 80px;    
+    // line-height: 75px;
+    line-height: 1;
+    padding-top: 28px; 
+    small { font-size: $font-size-large *2; }
+  }
+  
+  .sub-text {  
+    padding: 10px 0 10px 0;
+    width: 250px;
+    margin: 0 auto;
+    &.retail-walkbys        { background: url("../images/icon-walkbys.png") no-repeat ;  }
+    &.retail-shoppers       { background: url("../images/icon-shoppers.png") no-repeat ;  }
+    &.retail-newshoppers    { background: url("../images/icon-newshoppers.png") no-repeat ;  }
+    &.retail-repeatshoppers { background: url("../images/icon-repeatshoppers.png") no-repeat ;  }
+    &.retail-avgshoptime    { background: url("../images/icon-avgshoptime.png") no-repeat ; }
+  }
+  @media (min-width: $screen-sm-min)  { 
+    .sub-text {  
+      width: auto;
+      padding: 10px 0 10px 60px;
+      margin-left: -15px;
+      background-position: left -5px;
+    }
+  }
+}//.retails-stats
+@media (min-width: $screen-sm-min)  {  
+  .retail-live-stats {
+    float: left;
+    width: 25%;
+    .main-text { 
+      font-size: 80px; 
+      small { font-size: 36px; }
+    }
+  }
+}
+@media (min-width: $screen-md-min) {  
+  .retail-live-stats {
+    width: 19.5%;
+    .main-text { 
+      font-size: 80px; 
+      small { font-size: 36px; }
+    }
+  }
+}
+
+//Appears on retail analytics pages
+.retail-stats-header {
+    background: url("../images/angle-down.png") no-repeat bottom center;
+    min-height: 150px;
+    text-align: center;
+    a:hover { text-decoration: none; }
+    &.no-bg { background: none; }
+  }
+.retail-stats {
+  min-height: 115px;
+  padding-top: 22px;
+  padding-left: 35px;
+  text-align: center;
+  a:hover { text-decoration: none; }
+  .title { font-size: $font-size-small; }
+  .value { font-size: 43px; font-weight: bold; line-height: 42px; }
+  .change { font-size: $font-size-small;  }
+  small { font-size: $font-size-base; }
+  &.retail-attraction { background: url("../images/triangle-attraction.png") no-repeat left center; }
+  &.retail-engagement { background: url("../images/triangle-engagement.png") no-repeat left center; }
+  &.retail-sales      { background: url("../images/triangle-sales.png") no-repeat left center; }
+  &.retail-loyalty    { background: url("../images/triangle-loyalty.png") no-repeat left center; }
+}
+@media (min-width: $screen-sm-min) { 
+  .retail-stats { 
+    text-align: left;
+  }
+}
+@media (min-width: $screen-md-min) { 
+  .retail-stats { 
+    .change { text-align: right; margin-top: -20px;}
+  }
+}
+
+//Appears on most retail analytics as navigation
+nav.retail-nav {
+  margin: 10px 0;
+  .nav {
+    > li {
+      margin-top: 5px;
+      display: block;
+      min-width: 40px;
+      height: 70px;
+      vertical-align: middle;
+      text-align: center;
+      
+      > a {
+        padding: 20px 5px 20px 85px;
+        color: $gray-light;
+        font-size: $font-size-large +2;
+        &:hover, &:focus {
+          background-color: transparent;
+          color: $text-color;
+        }
+      }
+      &.overview { 
+        background: url("../images/icon-overview.png") no-repeat -10px center #bcbcbc; 
+        > a { 
+          color: white !important; 
+        }
+      } 
+      &.divider {
+        background: url("../images/angle-right.png") no-repeat center center;
+        width: 25px;
+        height: 70px;
+        display: none;
+      }
+      &.active { > a { color: $text-color; } }
+      &.attraction { 
+        background: url("../images/icon-attraction-p.png") no-repeat left center; 
+        &:hover, &.active { background: url("../images/icon-attraction-a.png") no-repeat left center;  }
+      }
+      &.engagement { 
+        background: url("../images/icon-engagement-p.png") no-repeat left center; 
+        &:hover, &.active { background: url("../images/icon-engagement-a.png") no-repeat left center;  }
+      }
+      &.sales { 
+        background: url("../images/icon-sales-p.png") no-repeat left center; 
+        &:hover, &.active { background: url("../images/icon-sales-a.png") no-repeat left center;  }
+      }
+      &.loyalty { 
+        background: url("../images/icon-loyalty-p.png") no-repeat left center; 
+        &:hover, &.active { background: url("../images/icon-loyalty-a.png") no-repeat left center;  }
+      }
+    }//li
+  }
+
+  @media (min-width: $screen-sm-min) { 
+    .nav {
+      > li {
+        position: relative;
+        display: inline-block;
+        background-size: 35% !important;
+        &.overview {
+          height: 50px;
+          margin-right: 10px;
+          background-size: 45% !important;
+          > a {padding: 10px 15px 10px 35px;}
+        }
+        &.divider { display: inline-block; }
+      }//li
+    }
+  }  
+}//nav.retail-nav
+
+
+// Custom panels
+.panel-dashboard {
+  @extend .panel-default;
+  margin-bottom: 0;
+  @include box-shadow(none);        
+  border: none;
+  border-radius: 0; 
+  .panel-heading {
+    margin-top: 0;
+    background: $gray-soft;
+    color: $gray-light;
+  }      
+}
+.panel-settings {
+  @extend .panel-default;
+  @include box-shadow(none);
+  margin-bottom: 30px;
+  border-color: $gray; 
+  .panel-heading { color: $text-color; font-size: $font-size-base + 2; }
+  //Form
+  .form, .form-horizontal {
+    label { font-weight: normal; }
+    .form-group { margin-bottom: 0; }
+  }
+  //Table
+  .table {
+    td { border-top: none !important; }
+  }
+}
+.subpanel {
+  .subpanel-heading {
+    margin-bottom: 5px;
+    border-bottom: 1px solid $gray;
+    .toggle.btn { margin-top: -3px; }
+  }
+
+}
+
+/* Custom upload image styling */
+.img-upload {
+  .img-thumbnail {
+    vertical-align: top;
+  }
+  .glyphicon { color: $gray; }
+}
+
+/* Custom background selector box */
+.bg-selector {
+  width: 166px;
+  height: 168px;
+  margin-bottom: 5px; 
+  border: 1px solid #ccc;
+  padding: 3px;
+  .selector-box {
+    div {
+      width: 50px;
+      height: 50px;
+      background-color: #ccc;
+      color: #fff;
+      display: inline-block;
+      padding: none;
+      margin: none;
+      cursor: pointer;
+      &.selected {
+        background-color: $gray;
+      }
+    }
+  }
+}
+
+/** Tablesorter **/
+table.tablesorter {
+  width: 100%; 
+  thead tr {
+    .header {
+      background-image: url(../images/tablesorter/bg.gif);
+      background-repeat: no-repeat;
+      background-position: center right;
+      cursor: pointer;
+    }
+    .headerSortUp {
+      background-image: url(../images/tablesorter/asc.gif);
+    }
+    .headerSortDown {
+      background-image: url(../images/tablesorter/desc.gif);
+    }
+  }
+}
+
+/** Table of metrics **/
+.table-metrics {
+  font-size: 21px;;
+  color: #999; 
+  thead {
+    background: $gray-soft;
+    color: $gray-slate;
+    tr {
+      th {
+        border: none;
+        padding: 5px 25px;
+        font-weight: normal;
+        vertical-align: middle;
+        text-align: center;
+        &:first-child { text-align: left; }
+      }
+    }
+  }
+  tfoot {
+    display: table-row-group; 
+    background: $gray-slate;
+    color: white;
+    font-weight: bold;
+    tr {
+      td {  
+        border: transparent;
+        border-right: 1px solid white;
+        padding: 25px 25px;
+        font-size: 22px; 
+        line-height: 1;
+        vertical-align: middle;
+        text-align: center;
+        &:first-child { text-align: left; font-weight: normal; }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td { 
+        position: relative;
+        border-top: none;
+        border-bottom: 1px solid $gray-soft;
+        padding: 20px 25px;
+        font-size: 20px;
+        line-height: 1;
+        vertical-align: middle;
+        text-align: center;
+        width: 20%;
+        &:first-child { text-align: left; }
+      }
+      td:after {
+        content:''; 
+        width:50%; 
+        height:2px; 
+        background:none; 
+        position:absolute; 
+        bottom:-1px; 
+        right: 25%; 
+      }
+      td.green:after, td.plus:after, td.up:after { background: $brand-success; }
+      td.red:after, td.minus:after, td.down:after { background: $brand-danger; }
+    }
   }
   .value {
-    font-size: $font-size-base * 1.5;
     font-weight: bold;
-    line-height: 1.2;
-    &.normal { font-weight: normal; }
+    display: block;
   }
   .change {
-    &.plus, &.up    { color: $brand-success; }
-    &.minus, &.down { color: $brand-danger; }
+    font-size: $font-size-small;
+    &.green, &.plus, &.up { color: $brand-success; }
+    &.red, &.minus, &.down { color: $brand-danger; }
   }
-  &.no-icon         { padding-left: 0 !important; }
-  &.wide            { width: 200px; }
-  &.narrow          { width: 95px; }
-  &.text-left       { text-align: left !important; padding-left: 30px; }
-  &.text-right      { text-align: right !important; }
-  &.walk-by-traffic { background: url("../images/data-walk-by.png")          no-repeat; }
-  &.capture-rate    { background: url("../images/data-capture-rate.png")     no-repeat; }
-  &.visitor-traffic { background: url("../images/data-visitor-traffic.png")  no-repeat; }
-  &.dwell-time      { background: url("../images/data-dwell-time.png")       no-repeat; }
-  &.new-visitors    { background: url("../images/data-new-visitors.png")     no-repeat; }
-  &.repeat-visitors { background: url("../images/data-repeat-visitors.png")  no-repeat; }
-  &.retention-rate  { background: url("../images/data-retention-rate.png")   no-repeat; }
-  &.visit-frequency { background: url("../images/data-visit-frequency.png")  no-repeat; }
+}//.table-metrics
+
+
+
+/** Bootstrap Colorpicker customization **/
+.colorpicker-element {
+  .input-group-addon, .add-on {
+    padding: 0;
+    i {
+      display: inline-block;
+      width: 84px;
+      height: 32px;
+      vertical-align: text-top;
+      cursor: pointer;
+    }
+  }
+  input[type='text'] {
+    width: 84px;
+  }
+}
+.colorpicker-visible { padding: 5px; }
+
+/** Boostrap Select customization **/
+.bootstrap-select {
+  .btn-default { 
+    border-color: #ccc; 
+    &:hover { }
+  }
+  .btn-link {
+    padding: 0;
+  }
+  .caret {
+    border: none;
+    margin-top: -7px !important;
+    right: 15px !important;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &:before {
+      content: "\f107";
+    }
+  }
+}
+.selectpicker {}
+
+/** Bootstrap Toggle customization */
+.toggle-group { 
+  @include transition(left 0.5s);
+  text-transform: uppercase;
+  .btn-default { border-color: #ccc; }
+}
+.slow .toggle-group { @include transition(left 0.7s !important); }
+.fast .toggle-group { @include transition(left 0.35s); }
+.quick .toggle-group { @include transition(none); }
+
+/** Bootstrap WYSIWYG customization **/
+.wysiwyg-editor {
+
+}
+.wysihtml5-toolbar {
+  .btn-default { color: $gray; }
+  .glyphicon { color: $gray; }
 }
 
-
-/** Custom Calendar **/
+/** Custom Calendar -- not sure if still used **/
 .custom-calendar {
   ul {
     width: 280px;
@@ -260,7 +928,6 @@ footer {
       display: block;
       float: left;
       margin: 2px;
-      //background-color: #eee;
       border-radius: 3px;
     }    
   }//ul
@@ -289,123 +956,27 @@ footer {
   }
 }//.custom-calendar
 
-/** Tablesorter **/
-table.tablesorter {
-  width: 100%;
-  thead tr {
-    .header {
-      background-image: url(../images/tablesorter/bg.gif);
-      background-repeat: no-repeat;
-      background-position: center left;
-      cursor: pointer;
-    }
-    .headerSortUp {
-      background-image: url(../images/tablesorter/asc.gif);
-    }
-    .headerSortDown {
-      background-image: url(../images/tablesorter/desc.gif);
-    }
-  }
+
+
+/*************************/
+/*  Responsive Overrides */
+/*************************/
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: $screen-sm-min) {  
+  
 }
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: $screen-md-min) {  
 
-/** Table of metrics **/
-//display footer as normal row
-.table-metrics {
-  font-size: $font-size-small - 2;   
-  thead {
-    background: lighten($color1, 15%);
-    color: white;
-    font-size: $font-size-small; 
-    
-    th { border: none !important; vertical-align: middle !important;}
-  }
-  tfoot {
-    display: table-row-group; 
-    background: lighten($color1, 15%);
-    color: white;
-    td { border: none !important; }
-  }
-  td:nth-child(2) { 
-    text-align: left; 
-    font-size: $font-size-base;
-  } 
-  th, td { text-align: center;}
-  tr, td {
-    &.up, &.plus, &.success    { background-color: lighten($brand-success, 30%) !important; }
-    &.down, &.minus, &.danger  {background-color: lighten($brand-danger, 30%) !important; }
-    vertical-align: middle !important;
-  }
-  td > span {
-    display: inline-block;
-    position: relative;
-  }
-  .id { 
-    position: relative;
-    padding-left: 0;
-    height: 55px;
-    font-size: $font-size-base; 
-    color: white;
-    //triangle bg
-    div {
-      position: absolute;
-      top: 0;
-      width: 0; 
-      height: 0; 
-      border-bottom: 27px solid transparent;  /* left arrow slant */
-      border-top: 27px solid transparent; /* right arrow slant */
-      border-left: 30px solid $color3; /* bottom, add background color here */
-      font-size: 0;
-      line-height: 0;
-    }
-  }
-  .store    { font-size: $font-size-base; }
-  .location { font-size: $font-size-small; color: $gray; }
-  .value    { font-size: $font-size-large; }  
-  .time {
-    margin: 0 10px;
-    .value {}
-    .unit {
-      position: absolute;
-      left: -10px;
-      right: -10px;
-      top: 17px;
-      font-size: $font-size-small - 2;
-    }
-  }
-  .change {
-    font-size: $font-size-small;
-    margin: 0 5px;
-    &.plus, &.up    { 
-      color: $brand-success; 
-      i { margin-top: -10px; }
-    }
-    &.minus, &.down { 
-      color: $brand-danger; 
-      i { margin-top: 12px; }
-    }
-    i {
-      font-size: $font-size-base;
-      position: absolute;
-      left: 0;
-      right: 0;
-    }
-  } //.change
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: $screen-lg-min) { }
 
-  &.tablesorter {
-    thead tr {
-      .header {
-        background-image: url(../images/tablesorter/bg-white.gif);
-      }
-      .headerSortUp {
-        background-image: url(../images/tablesorter/asc-white.gif);
-      }
-      .headerSortDown {
-        background-image: url(../images/tablesorter/desc-white.gif);
-      }
-    }
-  }
-}//.table-metrics
-
-
-
-
+@media (max-width: $screen-xs-max) {  }
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {  }
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {  }
+@media (min-width: $screen-lg-min) {  }
